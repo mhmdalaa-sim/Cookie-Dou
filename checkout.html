@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Checkout - Cookie Dou Bakery">
+    <title>Checkout - Cookie Dou</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="js/Products.js"></script>
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .cart-items {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #111;
+        }
+        
+        .cart-item-price {
+            color: #478ac9;
+            font-weight: 600;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .quantity-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        
+        .remove-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .remove-btn:hover {
+            background: #ff3742;
+        }
+        
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+        
+        .summary-row.total {
+            border-top: 2px solid #478ac9;
+            padding-top: 15px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #111;
+        }
+        
+        .checkout-form {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #111;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #478ac9;
+        }
+        
+        .place-order-btn {
+            width: 100%;
+            background: #478ac9;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .place-order-btn:hover {
+            background: #3a6fa5;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-cart h2 {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart a {
+            color: #478ac9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .empty-cart a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .quantity-controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><img src="images/Logo.png" alt="logo"></div>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav" id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#Products">Products</a></li>
+                        <li><a href="index.html#Reviews">Reviews</a></li>
+                        <li><a href="index.html#Contact">Contact</a></li>
+                        <li><a href="checkout.html" class="cart-link">
+                            <span class="cart-icon">🛒</span>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Your Cart</h1>
+            <p>Review your items and proceed to checkout</p>
+        </div>
+
+        <div id="cartContent">
+            <!-- Cart content will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Cart Manager Class (same as in main script)
+        class CartManager {
+            constructor() {
+                this.cart = this.loadCart();
+                this.updateCartDisplay();
+            }
+
+            loadCart() {
+                try {
+                    const savedCart = localStorage.getItem('cookieDouCart');
+                    return savedCart ? JSON.parse(savedCart) : [];
+                } catch (error) {
+                    console.error('Error loading cart from localStorage:', error);
+                    return [];
+                }
+            }
+
+            saveCart() {
+                try {
+                    localStorage.setItem('cookieDouCart', JSON.stringify(this.cart));
+                } catch (error) {
+                    console.error('Error saving cart to localStorage:', error);
+                }
+            }
+
+            removeFromCart(productId) {
+                this.cart = this.cart.filter(item => item.id !== productId);
+                this.saveCart();
+                this.updateCartDisplay();
+                this.loadCartContent();
+            }
+
+            updateQuantity(productId, quantity) {
+                const item = this.cart.find(item => item.id === productId);
+                if (item) {
+                    if (quantity <= 0) {
+                        this.removeFromCart(productId);
+                    } else {
+                        item.quantity = quantity;
+                        this.saveCart();
+                        this.updateCartDisplay();
+                        this.loadCartContent();
+                    }
+                }
+            }
+
+            getTotal() {
+                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+
+            getItemCount() {
+                return this.cart.reduce((count, item) => count + item.quantity, 0);
+            }
+
+            clearCart() {
+                this.cart = [];
+                this.saveCart();
+                this.updateCartDisplay();
+                this.loadCartContent();
+            }
+
+            updateCartDisplay() {
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    const itemCount = this.getItemCount();
+                    cartCount.textContent = itemCount;
+                    cartCount.style.display = itemCount > 0 ? 'flex' : 'none';
+                }
+            }
+
+            loadCartContent() {
+                const cartContent = document.getElementById('cartContent');
+                
+                if (this.cart.length === 0) {
+                    cartContent.innerHTML = `
+                        <div class="empty-cart">
+                            <h2>Your cart is empty</h2>
+                            <p>Add some delicious cookies to get started!</p>
+                            <a href="index.html#Products">Browse Products</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const total = this.getTotal();
+                const subtotal = total;
+                const shipping = total > 50 ? 0 : 5.99;
+                const finalTotal = subtotal + shipping;
+
+                cartContent.innerHTML = `
+                    <div class="checkout-content">
+                        <div class="cart-items">
+                            <h2>Cart Items (${this.getItemCount()})</h2>
+                            ${this.cart.map(item => `
+                                <div class="cart-item">
+                                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                                    <div class="cart-item-details">
+                                        <div class="cart-item-name">${item.name}</div>
+                                        <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+                                    </div>
+                                    <div class="quantity-controls">
+                                        <button class="quantity-btn" onclick="cartManager.updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="cartManager.updateQuantity(${item.id}, parseInt(this.value))">
+                                        <button class="quantity-btn" onclick="cartManager.updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                                    </div>
+                                    <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                                    <button class="remove-btn" onclick="cartManager.removeFromCart(${item.id})">Remove</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="order-summary">
+                            <h3>Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span>$${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping:</span>
+                                <span>${shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span>$${finalTotal.toFixed(2)}</span>
+                            </div>
+                            
+                            <div class="checkout-form">
+                                <h3>Checkout Information</h3>
+                                <form id="checkoutForm">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName" name="fullName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea id="address" name="address" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zipCode">ZIP Code</label>
+                                        <input type="text" id="zipCode" name="zipCode" required>
+                                    </div>
+                                    <button type="submit" class="place-order-btn">Place Order</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize cart manager and load content
+        const cartManager = new CartManager();
+        cartManager.loadCartContent();
+
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutForm = document.getElementById('checkoutForm');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(checkoutForm);
+                    const orderData = {
+                        customer: {
+                            name: formData.get('fullName'),
+                            email: formData.get('email'),
+                            phone: formData.get('phone'),
+                            address: formData.get('address'),
+                            city: formData.get('city'),
+                            zipCode: formData.get('zipCode')
+                        },
+                        items: cartManager.cart,
+                        total: cartManager.getTotal(),
+                        date: new Date().toISOString()
+                    };
+                    
+                    // In a real application, you would send this to your server
+                    console.log('Order placed:', orderData);
+                    
+                    // Show success message
+                    alert('Order placed successfully! Thank you for your purchase.');
+                    
+                    // Clear cart and redirect
+                    cartManager.clearCart();
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
