@@ -397,6 +397,9 @@
                             
                             <div class="checkout-form">
                                 <h3>Checkout Information</h3>
+                                <p style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; color: #1976d2; font-size: 0.9rem;">
+                                    📱 <strong>WhatsApp Order:</strong> After filling the form, your order will be sent directly to our WhatsApp catalog for processing. You'll be redirected to WhatsApp to complete your order.
+                                </p>
                                 <form id="checkoutForm">
                                     <div class="form-group">
                                         <label for="fullName">Full Name</label>
@@ -422,7 +425,7 @@
                                         <label for="zipCode">ZIP Code</label>
                                         <input type="text" id="zipCode" name="zipCode" required>
                                     </div>
-                                    <button type="submit" class="place-order-btn">Place Order</button>
+                                    <button type="submit" class="place-order-btn">📱 Send Order to WhatsApp</button>
                                 </form>
                             </div>
                         </div>
@@ -457,18 +460,77 @@
                         date: new Date().toISOString()
                     };
                     
-                    // In a real application, you would send this to your server
-                    console.log('Order placed:', orderData);
-                    
-                    // Show success message
-                    alert('Order placed successfully! Thank you for your purchase.');
-                    
-                    // Clear cart and redirect
-                    cartManager.clearCart();
-                    window.location.href = 'index.html';
+                    // Send order to WhatsApp
+                    sendOrderToWhatsApp(orderData);
                 });
             }
         });
+
+        // Function to send order to WhatsApp
+        function sendOrderToWhatsApp(orderData) {
+            const whatsappNumber = '201093021103';
+            const subtotal = orderData.total;
+            const shipping = subtotal > 50 ? 0 : 5.99;
+            const finalTotal = subtotal + shipping;
+            
+            // Format order items
+            const orderItems = orderData.items.map(item => {
+                return `🍪 *${item.name}*
+   Quantity: ${item.quantity}
+   Price: $${item.price.toFixed(2)} each
+   Subtotal: $${(item.price * item.quantity).toFixed(2)}`;
+            }).join('\n\n');
+            
+            // Create structured message
+            const message = `🛒 *NEW ORDER - Cookie Dou Bakery*
+
+📅 *Order Date:* ${new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}
+
+👤 *Customer Information:*
+• Name: ${orderData.customer.name}
+• Email: ${orderData.customer.email}
+• Phone: ${orderData.customer.phone}
+• Address: ${orderData.customer.address}
+• City: ${orderData.customer.city}
+• ZIP Code: ${orderData.customer.zipCode}
+
+🛍️ *Order Items:*
+${orderItems}
+
+💰 *Order Summary:*
+• Subtotal: $${subtotal.toFixed(2)}
+• Shipping: ${shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
+• *Total: $${finalTotal.toFixed(2)}*
+
+📦 *Total Items:* ${cartManager.getItemCount()}
+
+---
+Thank you for choosing Cookie Dou! 🍪✨`;
+
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            setTimeout(() => {
+                alert('Order sent to WhatsApp successfully! Please complete your order through WhatsApp.');
+                
+                // Clear cart and redirect
+                cartManager.clearCart();
+                window.location.href = 'index.html';
+            }, 1000);
+        }
 
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
