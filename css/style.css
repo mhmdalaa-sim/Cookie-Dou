@@ -64,6 +64,8 @@ body {
     width: auto;
     max-width: 150px;
     object-fit: contain;
+    transform: scale(1.35); /* visually larger without changing layout height */
+    transform-origin: left center;
 }
 
 .nav ul {
@@ -418,14 +420,17 @@ body {
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* center three testimonials */
     gap: 30px;
     margin-top: 50px;
+    justify-content: center; /* center the grid within container */
+    justify-items: center; /* center items inside their tracks */
 }
 
 .team-member {
     padding: 30px;
     text-align: center; /* ensure centered alignment */
+    max-width: 360px; /* keep columns narrow for visual centering */
 }
 
 .team-image {
@@ -468,6 +473,7 @@ body {
     display: inline-block;
     width: 48px; /* larger action buttons */
     height: 48px;
+    text-decoration: none; /* prevent link underline below icons */
 }
 
 .social-icon svg {
@@ -509,28 +515,32 @@ body {
     box-shadow: 0 10px 24px rgba(0,0,0,0.45);
 }
 
-/* Footer icons should be black on orange footer */
+/* Footer icons: larger with dark circle background for contrast on orange */
 .footer .social-icon {
-    width: 56px;
-    height: 56px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    border: 2px solid #080908; /* visible boundary on orange footer */
+    background-color: #080908; /* dark circle */
+    border: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 .footer .social-icon svg,
 .footer .social-icon i {
-    width: 28px;
-    height: 28px;
-    fill: #080908;
-    color: #080908;
+    width: 44px;
+    height: 44px;
+    fill: #EA8D54; /* orange glyph on dark */
+    color: #EA8D54;
     line-height: 1;
 }
+.footer .social-icon i { font-size: 44px; }
 .footer .social-icon:hover {
-    background-color: rgba(8,9,8,0.08);
+    background-color: #000;
     transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.3);
 }
 
 /* Contact Section */
@@ -646,6 +656,47 @@ body {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
+}
+
+/* Checkout (shared EN/AR) */
+.checkout-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.checkout-header { text-align: center; margin-bottom: 40px; }
+.checkout-content { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+.cart-items { background: #111111; border-radius: 10px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+.cart-item { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid #1f1f1f; }
+.cart-item:last-child { border-bottom: none; }
+.cart-item-image { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+.cart-item-details { flex: 1; }
+.cart-item-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 5px; color: #ffffff; }
+.cart-item-price { color: #EA8D54; font-weight: 700; }
+.quantity-controls { display: flex; align-items: center; gap: 10px; }
+.quantity-btn { width: 30px; height: 30px; border: 1px solid #2a2a2a; background: #0f1010; color: #ffffff; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+.quantity-btn:hover { background: #151616; }
+.quantity-input { width: 50px; text-align: center; border: 1px solid #2a2a2a; background: #0f1010; color: #ffffff; border-radius: 4px; padding: 5px; }
+.remove-btn { background: #c0392b; color: #ffffff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.remove-btn:hover { background: #a83225; }
+.order-summary { background: #111111; border-radius: 10px; padding: 30px; height: fit-content; position: sticky; top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 10px; }
+.summary-row.total { border-top: 2px solid #EA8D54; padding-top: 15px; margin-top: 20px; font-size: 1.2rem; font-weight: 700; color: #ffffff; }
+.checkout-form { background: #0f1010; border-radius: 10px; padding: 30px; margin-top: 30px; box-shadow: inset 0 0 0 1px #1f1f1f; }
+.checkout-form h3 { color: #ffffff; }
+.checkout-form p a { color: #EA8D54; }
+.place-order-btn { width: 100%; background: #EA8D54; color: #080908; border: none; padding: 15px; border-radius: 5px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+.place-order-btn:hover { background: #d67941; }
+.empty-cart { text-align: center; padding: 60px 20px; }
+.empty-cart h2 { color: #cccccc; margin-bottom: 20px; }
+.empty-cart a { color: #EA8D54; text-decoration: none; font-weight: 600; }
+.empty-cart a:hover { text-decoration: underline; }
+
+/* RTL alignment for checkout */
+.rtl .checkout-content { direction: rtl; }
+.rtl .cart-item { flex-direction: row-reverse; }
+.rtl .summary-row { flex-direction: row-reverse; }
+
+@media (max-width: 768px) {
+    .checkout-content { grid-template-columns: 1fr; gap: 20px; }
+    .cart-item { flex-direction: column; text-align: center; gap: 15px; }
+    .quantity-controls { justify-content: center; }
 }
 
 /* Responsive Design */
