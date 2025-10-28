@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الدفع - كوكى دو: بسكويت وشوكولاتة مصنوعة يدوياً">
+    <title>الدفع - حلويات كوكى دو</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="alternate" href="checkout-ar.html" hreflang="ar" />
+    <link rel="alternate" href="checkout.html" hreflang="en" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Kufam:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="js/Products.js"></script>
+</head>
+<body class="rtl">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><img src="images/Logo.png" alt="logo"></div>
+                <button class="menu-toggle" id="menuToggle" aria-label="تبديل القائمة">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav" id="mainNav">
+                    <ul>
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="index-ar.html#Products">حلوياتنا</a></li>
+                        <li><a href="index-ar.html#Reviews">آراء العملاء</a></li>
+                        <li><a href="index-ar.html#Contact">تواصل</a></li>
+                        <li><a href="checkout-ar.html" class="cart-link">
+                            <span class="cart-icon">🛒</span>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a></li>
+                        <li><a href="checkout.html" lang="en" title="English">EN</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>سلة التسوق</h1>
+            <p>راجع منتجاتك وأكمل عملية الدفع</p>
+        </div>
+
+        <div id="cartContent"></div>
+    </div>
+
+    <script>
+        // Arabic checkout uses same cart/js logic but Arabic labels in summary
+        class CartManager {
+            constructor() {
+                this.cart = this.loadCart();
+                this.updateCartDisplay();
+            }
+            loadCart() { try { const s = localStorage.getItem('cookieDouCart'); return s ? JSON.parse(s) : []; } catch { return []; } }
+            saveCart() { try { localStorage.setItem('cookieDouCart', JSON.stringify(this.cart)); } catch {} }
+            removeFromCart(id) { this.cart = this.cart.filter(i => i.id !== id); this.saveCart(); this.updateCartDisplay(); this.loadCartContent(); }
+            updateQuantity(id, q) { const it = this.cart.find(i => i.id === id); if (it) { if (q <= 0) { this.removeFromCart(id); } else { it.quantity = q; this.saveCart(); this.updateCartDisplay(); this.loadCartContent(); } } }
+            getTotal() { return this.cart.reduce((t, i) => t + (i.price * i.quantity), 0); }
+            getItemCount() { return this.cart.reduce((c, i) => c + i.quantity, 0); }
+            updateCartDisplay() { const c = document.getElementById('cartCount'); if (c) { const n = this.getItemCount(); c.textContent = n; c.style.display = n > 0 ? 'flex' : 'none'; } }
+            loadCartContent() {
+                const el = document.getElementById('cartContent');
+                if (this.cart.length === 0) { el.innerHTML = `
+                    <div class="empty-cart">
+                        <h2>سلتك فارغة</h2>
+                        <p>أضف بعض حلويات كوكى دو للبدء!</p>
+                        <a href="index-ar.html#Products">تصفح الحلويات</a>
+                    </div>`; return; }
+                const total = this.getTotal();
+                const shipping = total > 50 ? 0 : 5.99;
+                const finalTotal = total + shipping;
+                el.innerHTML = `
+                    <div class="checkout-content">
+                        <div class="cart-items">
+                            <h2>المشتريات (${this.getItemCount()})</h2>
+                            ${this.cart.map(item => `
+                                <div class=\"cart-item\">
+                                    <img src=\"${item.image}\" alt=\"${item.name}\" class=\"cart-item-image\">
+                                    <div class=\"cart-item-details\">
+                                        <div class=\"cart-item-name\">${item.name}</div>
+                                        <div class=\"cart-item-price\">$${item.price.toFixed(2)} لكل قطعة</div>
+                                    </div>
+                                    <div class=\"quantity-controls\">
+                                        <button class=\"quantity-btn\" onclick=\"cartManager.updateQuantity(${item.id}, ${item.quantity - 1})\">-</button>
+                                        <input type=\"number\" class=\"quantity-input\" value=\"${item.quantity}\" min=\"1\" onchange=\"cartManager.updateQuantity(${item.id}, parseInt(this.value))\">
+                                        <button class=\"quantity-btn\" onclick=\"cartManager.updateQuantity(${item.id}, ${item.quantity + 1})\">+</button>
+                                    </div>
+                                    <div class=\"cart-item-price\">$${(item.price * item.quantity).toFixed(2)}</div>
+                                    <button class=\"remove-btn\" onclick=\"cartManager.removeFromCart(${item.id})\">إزالة</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-summary">
+                            <h3>ملخص الطلب</h3>
+                            <div class="summary-row"><span>المجموع الفرعي:</span><span>$${total.toFixed(2)}</span></div>
+                            <div class="summary-row"><span>الشحن:</span><span>${shipping === 0 ? 'مجاني' : `$${shipping.toFixed(2)}`}</span></div>
+                            <div class="summary-row total"><span>الإجمالي:</span><span>$${finalTotal.toFixed(2)}</span></div>
+                            <div class="checkout-form">
+                                <h3>بيانات الدفع</h3>
+                                <p style="background:#e3f2fd;padding:15px;border-radius:5px;margin-bottom:20px;color:#1976d2;font-size:0.9rem;">📱 <strong>طلب عبر واتساب:</strong> سيتم إرسال طلبك مباشرة إلى واتساب لإتمامه.</p>
+                                <form id="checkoutForm">
+                                    <div class="form-group"><label for="fullName">الاسم الكامل</label><input type="text" id="fullName" name="fullName" required></div>
+                                    <div class="form-group"><label for="email">البريد الإلكتروني</label><input type="email" id="email" name="email" required></div>
+                                    <div class="form-group"><label for="phone">رقم الهاتف</label><input type="tel" id="phone" name="phone" required></div>
+                                    <div class="form-group"><label for="address">العنوان</label><textarea id="address" name="address" rows="3" required></textarea></div>
+                                    <div class="form-group"><label for="city">المدينة</label><input type="text" id="city" name="city" required></div>
+                                    <div class="form-group"><label for="zipCode">الرمز البريدي</label><input type="text" id="zipCode" name="zipCode" required></div>
+                                    <button type="submit" class="place-order-btn">📱 إرسال الطلب إلى واتساب</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
+        const cartManager = new CartManager();
+        cartManager.loadCartContent();
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('checkoutForm');
+            if (form) form.addEventListener('submit', (e) => { e.preventDefault(); sendOrderToWhatsApp(); });
+        });
+        function sendOrderToWhatsApp() {
+            const whatsappNumber = '201093021103';
+            const subtotal = cartManager.getTotal();
+            const shipping = subtotal > 50 ? 0 : 5.99;
+            const finalTotal = subtotal + shipping;
+            const items = cartManager.cart.map(i => `🍪 *${i.name}*\nالكمية: ${i.quantity}\nالسعر: $${i.price.toFixed(2)} لكل قطعة\nالمجموع: $${(i.price * i.quantity).toFixed(2)}`).join('\n\n');
+            const message = `🛒 *طلب جديد - حلويات كوكى دو*\n\n🛍️ *المنتجات:*\n${items}\n\n💰 *الملخص:*\n• المجموع الفرعي: $${subtotal.toFixed(2)}\n• الشحن: ${shipping === 0 ? 'مجاني' : `$${shipping.toFixed(2)}`}\n• *الإجمالي: $${finalTotal.toFixed(2)}*`;
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        if (menuToggle && mainNav) menuToggle.addEventListener('click', () => { mainNav.classList.toggle('active'); menuToggle.classList.toggle('active'); });
+    </script>
+</body>
+</html>
+

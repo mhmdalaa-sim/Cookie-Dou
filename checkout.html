@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Checkout - Cookie Dou Bakery">
-    <title>Checkout - Cookie Dou</title>
+    <meta name="description" content="Checkout - Cookie Dou: Handcrafted Cookies & Chocolates">
+    <title>Checkout - Cookie Dou Treats</title>
+    <link rel="alternate" href="checkout.html" hreflang="en" />
+    <link rel="alternate" href="checkout-ar.html" hreflang="ar" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Kufam:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="js/Products.js"></script>
     <style>
         .checkout-container {
@@ -244,9 +246,10 @@
                 <nav class="nav" id="mainNav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#Products">Products</a></li>
+                        <li><a href="index.html#Products">Treats</a></li>
                         <li><a href="index.html#Reviews">Reviews</a></li>
                         <li><a href="index.html#Contact">Contact</a></li>
+                        <li><a href="checkout-ar.html" lang="ar" title="العربية">AR</a></li>
                         <li><a href="checkout.html" class="cart-link">
                             <span class="cart-icon">🛒</span>
                             <span class="cart-count" id="cartCount">0</span>
@@ -482,7 +485,7 @@
             }).join('\n\n');
             
             // Create structured message
-            const message = `🛒 *NEW ORDER - Cookie Dou Bakery*
+            const message = `🛒 *NEW ORDER - Cookie Dou Treats*
 
 📅 *Order Date:* ${new Date().toLocaleDateString('en-US', {
                 year: 'numeric',

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Organic Bread Menu - Fresh artisan breads and bakery products">
-    <title>Organic Bread Menu</title>
+    <meta name="description" content="Cookie Dou – Handcrafted Cookies & Chocolates. Rich flavors, premium ingredients, unforgettable moments.">
+    <title>Cookie Dou: The Art of Indulgence</title>
+    <link rel="alternate" href="index.html" hreflang="en" />
+    <link rel="alternate" href="index-ar.html" hreflang="ar" />
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8yK7WN3FkF5o3k6I/y9sW3qO10o4h2xKzQ2k4x" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Kufam:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="js/Products.js"></script>
 </head>
 <body>
@@ -32,6 +35,7 @@
                             <span class="cart-icon">🛒</span>
                             <span class="cart-count" id="cartCount">0</span>
                         </a></li>
+                        <li><a href="index-ar.html" lang="ar" title="العربية">AR</a></li>
                     </ul>
                 </nav>
             </div>
@@ -43,9 +47,9 @@
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Organic Bread Menu</h1>
-                <p class="hero-text">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-                <a href="#products" class="btn btn-primary">Read More</a>
+                <h1 class="hero-title">Cookie Dou: The Art of Indulgence</h1>
+                <p class="hero-text">Handcrafted Cookies & Chocolates. Rich flavors, Premium Ingredients, Unforgettable Moments.</p>
+                <a href="#Products" class="btn btn-primary">Discover Our Treats</a>
             </div>
         </div>
     </section>
@@ -53,45 +57,29 @@
     <!-- Products Section -->
     <section class="products-section" id="Products">
         <div class="container">
-            <h2 class="section-title">Our Products</h2>
-            <p class="section-subtitle">Select from our delicious range of organic breads and bakery products.<br>Click on any product to add it to your cart.</p>
+            <h2 class="section-title">Our Irresistible Treats</h2>
+            <p class="section-subtitle">Select from our handcrafted cookies, chocolates, and premium treats. Click any product to add it to your cart.</p>
             <div class="products-grid" id="productsGrid">
                 <!-- Products will be dynamically loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section">
+
+
+    <!-- Reviews Section -->
+    <section class="team-section" id="Reviews">
         <div class="container">
-            <div class="gallery-header">
-                <h2 class="section-title">Organic Breads</h2>
-                <p class="gallery-credit">Image from <a href="https://www.freepik.com/photos/food" target="_blank">Freepik</a></p>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item" data-index="0">
-                    <img src="images/bread1.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
+            <h2 class="section-title">What Our Dou-Lovers Say</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <p class="team-bio">"The Chocolate Hazelnut Cookies are not just cookies—they are a revelation! So soft, so rich, and the hazelnut crunch is perfect. I'm hooked!" - Sarah M.</p>
                 </div>
-                <div class="gallery-item" data-index="1">
-                    <img src="images/bread2.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
+                <div class="team-member">
+                    <p class="team-bio">"I ordered the Premium Butter Sable for a party, and they were the star of the show. The quality of the butter and chocolate is exceptional. Five stars!" - Ahmed Z.</p>
                 </div>
-                <div class="gallery-item" data-index="2">
-                    <img src="images/bread3.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item" data-index="3">
-                    <img src="images/bread1.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item" data-index="4">
-                    <img src="images/bread2.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
-                </div>
-                <div class="gallery-item" data-index="5">
-                    <img src="images/bread3.jpg" alt="Organic bread">
-                    <div class="gallery-overlay"></div>
+                <div class="team-member">
+                    <p class="team-bio">"Finally, a cookie that tastes like it's made with real love and care. The Coffee Bean Cookies are my new addiction. They are truly coffee's best friend." - Laila H.</p>
                 </div>
             </div>
         </div>
@@ -121,15 +109,10 @@
             </div>
             <div class="social-icons action-buttons" style="margin-top: 10px; gap:16px; justify-content:center;">
                 <a href="https://wa.me/201093021103" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" title="WhatsApp">
-                    <svg viewBox="0 0 32 32">
-                        <path d="M19.11 17.19c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.79-.7-1.32-1.57-1.47-1.84-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02s-.48.07-.73.34c-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.85c.14.18 1.93 2.94 4.67 4.02.65.28 1.16.45 1.56.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32zM16.08 4C9.88 4 4.84 9.03 4.84 15.24c0 2.7.88 5.2 2.38 7.23L6 28l5.69-1.49c1.98 1.08 4.25 1.7 6.65 1.7 6.21 0 11.24-5.03 11.24-11.24S22.29 4 16.08 4zm6.56 17.8c-.27.77-1.57 1.47-2.18 1.57-.59.11-1.36.16-2.2-.14-.5-.16-1.14-.37-1.97-.72-3.46-1.49-5.71-4.97-5.88-5.2-.18-.23-1.41-1.88-1.41-3.6s.89-2.55 1.2-2.91c.27-.32.72-.45 1.15-.45.14 0 .27 0 .39.02.36.02.54.04.78.6.27.65.86 2.01.94 2.15.07.14.11.32.02.5-.09.18-.14.27-.29.43-.16.18-.3.32-.43.52-.14.18-.3.37-.12.7.18.32.82 1.34 1.77 2.18 1.22 1.09 2.22 1.41 2.56 1.57.34.16.54.14.75-.09.23-.23.86-1.01 1.09-1.36.23-.34.48-.29.8-.16.32.14 2.04.96 2.39 1.13.34.16.57.27.66.43.09.16.09.91-.18 1.68z"/>
-                    </svg>
+                    <i class="fa-brands fa-whatsapp"></i>
                 </a>
                 <a href="https://www.instagram.com/cookie_dou24?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
-                    <svg viewBox="0 0 112 112">
-                        <path d="M55.9,32.9c-12.8,0-23.2,10.4-23.2,23.2s10.4,23.2,23.2,23.2s23.2-10.4,23.2-23.2S68.7,32.9,55.9,32.9z M55.9,69.4c-7.4,0-13.3-6-13.3-13.3c0-7.4,6-13.3,13.3-13.3s13.3,6,13.3,13.3C69.3,63.5,63.3,69.4,55.9,69.4z"></path>
-                        <path d="M79.7,26.8c-3,0-5.4,2.5-5.4,5.4s2.5,5.4,5.4,5.4c3,0,5.4-2.5,5.4-5.4S82.7,26.8,79.7,26.8z"></path>
-                    </svg>
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>
         </div>
@@ -140,15 +123,10 @@
         <div class="container">
             <div class="social-icons" style="margin-bottom: 15px;">
                 <a href="https://wa.me/201093021103" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" title="WhatsApp">
-                    <svg viewBox="0 0 32 32">
-                        <path d="M19.11 17.19c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.34-.79-.7-1.32-1.57-1.47-1.84-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02s-.48.07-.73.34c-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.85c.14.18 1.93 2.94 4.67 4.02.65.28 1.16.45 1.56.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.27.23-.62.23-1.15.16-1.27-.07-.11-.25-.18-.52-.32zM16.08 4C9.88 4 4.84 9.03 4.84 15.24c0 2.7.88 5.2 2.38 7.23L6 28l5.69-1.49c1.98 1.08 4.25 1.7 6.65 1.7 6.21 0 11.24-5.03 11.24-11.24S22.29 4 16.08 4zm6.56 17.8c-.27.77-1.57 1.47-2.18 1.57-.59.11-1.36.16-2.2-.14-.5-.16-1.14-.37-1.97-.72-3.46-1.49-5.71-4.97-5.88-5.2-.18-.23-1.41-1.88-1.41-3.6s.89-2.55 1.2-2.91c.27-.32.72-.45 1.15-.45.14 0 .27 0 .39.02.36.02.54.04.78.6.27.65.86 2.01.94 2.15.07.14.11.32.02.5-.09.18-.14.27-.29.43-.16.18-.3.32-.43.52-.14.18-.3.37-.12.7.18.32.82 1.34 1.77 2.18 1.22 1.09 2.22 1.41 2.56 1.57.34.16.54.14.75-.09.23-.23.86-1.01 1.09-1.36.23-.34.48-.29.8-.16.32.14 2.04.96 2.39 1.13.34.16.57.27.66.43.09.16.09.91-.18 1.68z"/>
-                    </svg>
+                    <i class="fa-brands fa-whatsapp"></i>
                 </a>
                 <a href="https://www.instagram.com/cookie_dou24?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
-                    <svg viewBox="0 0 112 112">
-                        <path d="M55.9,32.9c-12.8,0-23.2,10.4-23.2,23.2s10.4,23.2,23.2,23.2s23.2-10.4,23.2-23.2S68.7,32.9,55.9,32.9z M55.9,69.4c-7.4,0-13.3-6-13.3-13.3c0-7.4,6-13.3,13.3-13.3s13.3,6,13.3,13.3C69.3,63.5,63.3,69.4,55.9,69.4z"></path>
-                        <path d="M79.7,26.8c-3,0-5.4,2.5-5.4,5.4s2.5,5.4,5.4,5.4c3,0,5.4-2.5,5.4-5.4S82.7,26.8,79.7,26.8z"></path>
-                    </svg>
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>
             <p class="footer-text">&copy; 2025 Cookie Dou. All rights reserved.</p>

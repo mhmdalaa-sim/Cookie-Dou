@@ -11,11 +11,22 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    /* Body copy: Poppins (Latin) + Tajawal (Arabic) */
+    font-family: 'Poppins', 'Tajawal', sans-serif;
     line-height: 1.6;
     color: #f2f2f2;
     background-color: #080908; /* black */
 }
+
+/* RTL helpers */
+.rtl {
+    direction: rtl;
+}
+.rtl .header-content { flex-direction: row-reverse; }
+.rtl .nav ul { flex-direction: row-reverse; }
+.rtl .menu-toggle span { margin-left: 0; }
+.rtl .products-grid, .rtl .gallery-grid, .rtl .team-grid { direction: rtl; }
+.rtl .form-group input, .rtl .form-group textarea { text-align: right; }
 
 .container {
     max-width: 1140px;
@@ -44,10 +55,12 @@ body {
     font-weight: 700;
     color: #080908; /* dark text on orange */
     text-transform: lowercase;
+    /* Headings & brand: Montserrat (Latin) + Kufam (Arabic) */
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .logo img {
-    height: 40px;
+    height: 56px;
     width: auto;
     max-width: 150px;
     object-fit: contain;
@@ -64,6 +77,7 @@ body {
     color: #080908; /* dark text for contrast on orange header */
     font-weight: 500;
     transition: color 0.3s;
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .nav a:hover {
@@ -161,6 +175,7 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.1;
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .hero-text {
@@ -181,6 +196,7 @@ body {
     cursor: pointer;
     border: none;
     font-size: 0.875rem;
+    font-family: 'Poppins', 'Tajawal', sans-serif;
 }
 
 .btn-primary {
@@ -206,6 +222,7 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     color: #ffffff;
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .section-subtitle {
@@ -213,6 +230,7 @@ body {
     color: #cccccc;
     margin-bottom: 50px;
     line-height: 1.8;
+    font-family: 'Poppins', 'Tajawal', sans-serif;
 }
 
 .products-grid {
@@ -272,8 +290,8 @@ body {
 }
 
 .add-to-cart-btn {
-    background-color: #478ac9;
-    color: #fff;
+    background-color: #EA8D54; /* match navbar orange */
+    color: #080908; /* dark text */
     border: none;
     padding: 12px 24px;
     border-radius: 25px;
@@ -286,7 +304,7 @@ body {
 }
 
 .add-to-cart-btn:hover {
-    background-color: #3a6fa5;
+    background-color: #d67941; /* darker orange */
     transform: scale(1.05);
 }
 
@@ -300,6 +318,7 @@ body {
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 10px;
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .product-price {
@@ -320,6 +339,7 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    font-family: 'Poppins', 'Tajawal', sans-serif;
 }
 
 /* Gallery Section */
@@ -405,6 +425,7 @@ body {
 
 .team-member {
     padding: 30px;
+    text-align: center; /* ensure centered alignment */
 }
 
 .team-image {
@@ -426,12 +447,15 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     color: #ffffff;
+    font-family: 'Montserrat', 'Kufam', sans-serif;
 }
 
 .team-bio {
     color: #cccccc;
     margin-bottom: 20px;
     line-height: 1.6;
+    font-family: 'Poppins', 'Tajawal', sans-serif;
+    text-align: center; /* fix review text alignment */
 }
 
 .social-icons {
@@ -462,7 +486,7 @@ body {
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background-color: #EA8D54;
+    background-color: #080908; /* invert for maximum contrast */
     box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     display: inline-flex;
     align-items: center;
@@ -472,10 +496,15 @@ body {
 .action-buttons .social-icon svg {
     width: 36px;
     height: 36px;
-    fill: #080908; /* dark glyph on orange button */
+    fill: #EA8D54; /* orange glyph on dark button */
+}
+.action-buttons .social-icon i {
+    font-size: 36px;
+    line-height: 1;
+    color: #EA8D54; /* orange glyph on dark button */
 }
 .action-buttons .social-icon:hover {
-    background-color: #d67941;
+    background-color: #000; /* darker hover */
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0,0,0,0.45);
 }
@@ -491,10 +520,13 @@ body {
     justify-content: center;
     transition: background-color 0.3s, transform 0.2s;
 }
-.footer .social-icon svg {
+.footer .social-icon svg,
+.footer .social-icon i {
     width: 28px;
     height: 28px;
     fill: #080908;
+    color: #080908;
+    line-height: 1;
 }
 .footer .social-icon:hover {
     background-color: rgba(8,9,8,0.08);
@@ -525,7 +557,7 @@ body {
     border-bottom: 2px solid #EA8D54;
     background-color: #0f1010;
     color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', 'Tajawal', sans-serif;
     font-size: 1rem;
     transition: border-color 0.3s;
 }

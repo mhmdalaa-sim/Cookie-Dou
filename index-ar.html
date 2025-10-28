@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="كوكى دو – بسكويت وشوكولاتة مصنوعة يدوياً. نكهات غنية، مكونات فاخرة، لحظات لا تُنسى.">
+    <title>كوكى دو: فن الدلال</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ8yK7WN3FkF5o3k6I/y9sW3qO10o4h2xKzQ2k4x" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="alternate" href="index-ar.html" hreflang="ar" />
+    <link rel="alternate" href="index.html" hreflang="en" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Kufam:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="js/Products.js"></script>
+</head>
+<body class="rtl">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><img src="images/Logo.png" alt="logo"></div>
+                <button class="menu-toggle" id="menuToggle" aria-label="تبديل القائمة">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="nav" id="mainNav">
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#Products">حلوياتنا</a></li>
+                        <li><a href="#Reviews">آراء العملاء</a></li>
+                        <li><a href="#Contact">تواصل</a></li>
+                        <li><a href="checkout-ar.html" class="cart-link">
+                            <span class="cart-icon">🛒</span>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a></li>
+                        <li><a href="index.html" lang="en" title="English">EN</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">كوكى دو   </h1>
+                <p class="hero-text">بسكويت وشوكولاتة مصنوعة يدوياً. نكهات غنية، مكونات فاخرة، لحظات لا تُنسى.</p>
+                <a href="#Products" class="btn btn-primary">اكتشف حلوياتنا</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="Products">
+        <div class="container">
+            <h2 class="section-title">حلوياتنا التي لا تقاوم</h2>
+            <p class="section-subtitle">اختر من تشكيلة بسكويتنا وشوكولاتتنا المصنوعة بعناية.</p>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products injected by script.js using same data; Arabic descriptions already present -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Reviews Section -->
+    <section class="team-section" id="Reviews">
+        <div class="container">
+            <h2 class="section-title">ماذا يقول عشاق كوكى دو</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <p class="team-bio">"بسكويت الشوكولاتة والبندق ليست مجرد بسكويت — إنها تجربة مذهلة! طرية وغنية وقرمشة البندق مثالية." - سارة م.</p>
+                </div>
+                <div class="team-member">
+                    <p class="team-bio">"طلبت سابلّه الزبدة الفاخر لحفلة، وكانت نجمة الحفل. جودة الزبدة والشوكولاتة استثنائية. خمس نجوم!" - أحمد ز.</p>
+                </div>
+                <div class="team-member">
+                    <p class="team-bio">"أخيراً بسكويت بطعم مصنوع بحب واهتمام. بسكويت حبوب القهوة أصبح إدماني الجديد." - ليلى ح.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Send a Review Section -->
+    <section class="contact-section" id="Contact">
+        <div class="container">
+            <h2 class="section-title">أرسل مراجعتك</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="اكتب اسمك" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="اكتب بريدك الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="اكتب مراجعتك هنا" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">إرسال المراجعة</button>
+            </form>
+            <div class="contact-info" style="margin-top: 30px; text-align: center;">
+                <h3 style="color:#ffffff; margin-bottom: 10px;">تواصل معنا</h3>
+                <p class="section-subtitle" style="margin-bottom: 15px;">تواصل عبر واتساب أو إنستجرام</p>
+            </div>
+            <div class="social-icons action-buttons" style="margin-top: 10px; gap:16px; justify-content:center;">
+                <a href="https://wa.me/201093021103" class="social-icon" aria-label="واتساب" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/cookie_dou24?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon" aria-label="إنستجرام" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-icons" style="margin-bottom: 15px;">
+                <a href="https://wa.me/201093021103" class="social-icon" aria-label="واتساب" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/cookie_dou24?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-icon" aria-label="إنستجرام" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+            <p class="footer-text">© 2025 كوكى دو. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
